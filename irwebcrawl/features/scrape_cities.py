@@ -1,8 +1,9 @@
-from bs4 import BeautifulSoup
-import requests
+import pickle
 import re
 from urllib import parse
-import pickle
+
+import requests
+from bs4 import BeautifulSoup
 
 
 def create_city_set():
@@ -30,7 +31,7 @@ def create_city_set():
     names.update(create_flemish_city_set())
     names.remove('')
 
-    with open('cities.p', 'wb') as output_handle:
+    with open('../pickles/cities.p', 'wb') as output_handle:
         pickle.dump(names, output_handle)
 
 
@@ -56,7 +57,7 @@ def create_flemish_city_set():
 
 
 def load_city_set():
-    with open('cities.p', 'rb') as input_handle:
+    with open('../pickles/cities.p', 'rb') as input_handle:
         names = pickle.load(input_handle)
 
     return names

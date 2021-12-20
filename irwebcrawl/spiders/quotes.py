@@ -2,7 +2,7 @@ import scrapy
 
 
 class DutchSpider(scrapy.Spider):
-    name = 'dutchspider'
+    name = 'quotes'
     """
     start_urls = [
         'https://nl.wikipedia.org/wiki/Huis_Oranje-Nassau',
@@ -21,4 +21,4 @@ class DutchSpider(scrapy.Spider):
                 'tags': quote.css('div.tags a.tag::text').getall(),
             }
 
-            yield from response.follow_all(css='ul.pager a', callback=self.parse)
+        yield from response.follow_all(css='ul.pager a', callback=self.parse)

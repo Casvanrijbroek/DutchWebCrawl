@@ -1,8 +1,12 @@
 # Custom
-fy_NL
-OpenTaal-210G-woordenlijsten
-urls
+irwebcrawl/irwebcrawl/fy_NL
+irwebcrawl/irwebcrawl/OpenTaal-210G-woordenlijsten
+irwebcrawl/irwebcrawl/urls
 .idea
+dutch.json
+dutchspider.json
+quotes-liveblog.html
+quotes-wiki.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
