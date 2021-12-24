@@ -2,6 +2,7 @@ import json
 import re
 from urllib import parse
 import pickle
+import os
 
 
 def create_trained_dict():
@@ -96,12 +97,18 @@ def create_trained_dict():
 
     print(f'# of tokens after filtering: {len(keep)}')
 
-    with open('../pickles/trained_dict.p', 'wb') as output_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    trained_dict_path = os.path.join(root_dir, '../pickles/trained_dict.p')
+
+    with open(trained_dict_path, 'wb') as output_handle:
         pickle.dump(keep, output_handle)
 
 
 def load_trained_dict():
-    with open('../pickles/trained_dict.p', 'rb') as input_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    trained_dict_path = os.path.join(root_dir, '../pickles/trained_dict.p')
+
+    with open(trained_dict_path, 'rb') as input_handle:
         trained_dict = pickle.load(input_handle)
 
     return trained_dict

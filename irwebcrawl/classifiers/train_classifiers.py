@@ -1,3 +1,5 @@
+import os
+
 import graphviz
 import pandas as pd
 from sklearn import tree
@@ -8,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree._tree import TREE_LEAF
 import joblib
+
+from irwebcrawl.features.feature_extraction import Extractor
 
 
 def is_leaf(inner_tree, index):
@@ -167,5 +171,18 @@ def compute_metrics(y_true, y_pred):
     return {'accuracy': accuracy, 'f-measure': f1, 'precision': precision, 'recall': recall}
 
 
+def test_prediction():
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    classifier_path = os.path.join(root_dir, '../classifiers/decision_tree.joblib')
+    url_classifier = joblib.load(classifier_path)
+    extractor = Extractor()
+    url = 'https://nos.nl/liveblog/2407093-reizigers-uit-zuid-afrika-vast-op-schiphol-nijmegen-verbiedt-demonstratie'
+    features = np.array(extractor.extract_features(url)).reshape(1, -1)
+    result = url_classifier.predict(features)
+    success = result[0] == 1
+
+    return success
+
+
 if __name__ == '__main__':
-    main()
+    main

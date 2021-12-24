@@ -4,6 +4,7 @@ from urllib import parse
 
 import requests
 from bs4 import BeautifulSoup
+import os
 
 
 def create_city_set():
@@ -31,7 +32,10 @@ def create_city_set():
     names.update(create_flemish_city_set())
     names.remove('')
 
-    with open('../pickles/cities.p', 'wb') as output_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    cities_path = os.path.join(root_dir, '../pickles/cities.p')
+
+    with open(cities_path, 'wb') as output_handle:
         pickle.dump(names, output_handle)
 
 
@@ -57,7 +61,10 @@ def create_flemish_city_set():
 
 
 def load_city_set():
-    with open('../pickles/cities.p', 'rb') as input_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    cities_path = os.path.join(root_dir, '../pickles/cities.p')
+
+    with open(cities_path, 'rb') as input_handle:
         names = pickle.load(input_handle)
 
     return names

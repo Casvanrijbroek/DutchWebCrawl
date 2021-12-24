@@ -1,6 +1,7 @@
 import pickle
 import re
 from urllib import parse
+import os
 
 
 def create_encoded_word_set():
@@ -27,7 +28,10 @@ def create_encoded_word_set():
     words.difference_update(to_delete)
     words.remove('www')
 
-    with open('../pickles/words.p', 'wb') as output_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    words_path = os.path.join(root_dir, '../pickles/words.p')
+
+    with open(words_path, 'wb') as output_handle:
         pickle.dump(words, output_handle)
 
 
@@ -41,7 +45,10 @@ def create_frisian_word_set():
 
 
 def load_encoded_word_set():
-    with open('../pickles/words.p', 'rb') as input_handle:
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    words_path = os.path.join(root_dir, '../pickles/words.p')
+
+    with open(words_path, 'rb') as input_handle:
         words = pickle.load(input_handle)
 
     return words
